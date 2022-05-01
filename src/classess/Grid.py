@@ -1,7 +1,7 @@
 from functions.utlis import flatten_list
 from colorama import Fore, init
 init(autoreset=True)
-
+from functions.utlis import ScreenCleaner
 class Grid:
     def __init__(self, list_of_cubes: [[]]):
         self.grid = list_of_cubes
@@ -14,6 +14,7 @@ class Grid:
         self.total_score=0
         self.last_score=0
     def display_grid(self, ):
+        ScreenCleaner()
         print(' ---------------------------------------------------------------------------------')
         for index, x in enumerate(self.grid):
             print(f'|   {x[0]}{x[1]}{x[2]}{x[3]}{x[4]}{x[5]}{x[6]}{x[7]}{x[8]}{x[9]}{x[10]}{x[11]}{x[12]}{x[13]}{x[14]}{x[15]}   |'
@@ -175,12 +176,14 @@ class Grid:
                 for cube in rows:
                     if cube.group!='Empty':
                         cube.group= None
+            if self.total_score > 0:
+                self.total_score-=1
 
-            # TODO (chyba tos samo ) if in coordinates but no group single or empty (self.point.name cos tam ) jezeli nie ma na gridzie, invalid
         else:
-            print('invalid input try again ')
-            print(' Press coordinates x y example 00 56 12 14 etc. for element that has at least 1 adjusted cube with same color')
-            print(' press /finish to quit game ')
+            if self.total_score > 0:
+                self.total_score -= 1
+            pass
+
         return self
 
 

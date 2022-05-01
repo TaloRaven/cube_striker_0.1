@@ -61,5 +61,10 @@ class Cube():
                  'coordinates': (self.x + 1, self.y),
                  'group': grid.grid[self.y][self.x + 1].group})
         return adjusted_points
+
+    # TODO testing display
+    # def __str__(self):
+    #     return f"""{self.colour}{  f'[{self.x}{self.y}]' if self.colour != Fore.WHITE  else ( str(f'    ') if self.x < 10 else str(f'     '))}"""
+
     def __str__(self):
-        return f"""{self.colour}{  f'[{self.x}{self.y}]' if self.colour != Fore.WHITE  else ( str(f'[{0}{0}]') if self.x < 10 else str(f'[{0}{0}{0}]'))}"""
+        return f"""{f' {self.x}{self.y} ' if self.colour != Fore.WHITE  else ( str(f'[{0}{0}]') if self.x < 10 else str(f'[{0}{0}{0}]'))}"""

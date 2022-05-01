@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-from typing import Tuple, Union
+from typing import Union
 
 from classess.Level import Level
 from colorama import Fore, init
 
 init(autoreset=True)
-
 
 
 def next_wave(level: Level, game_state: 'str') -> tuple[Union[Level, Level], str]:
@@ -15,7 +14,7 @@ def next_wave(level: Level, game_state: 'str') -> tuple[Union[Level, Level], str
     # tutaj warunek stopu
     level.grid.current_wave += 1
     if level.grid.grid[-1][-1].colour != Fore.WHITE:
-        gamestate = 'break'
+        game_state = 'game_over'
 
     last_row = level.grid.grid[-1]
     grid_index_pop_column = -1
@@ -34,11 +33,11 @@ def next_wave(level: Level, game_state: 'str') -> tuple[Union[Level, Level], str
     # Replace empty column with new wave from mine to grid
     try:
         for index, element in enumerate(level.mine.mine):
-            last_droped_column = level.grid.grid[index].pop(grid_index_pop_column)
+            last_dropped_column = level.grid.grid[index].pop(grid_index_pop_column)
             level.grid.grid[index].insert(0, element[-1])
             level.mine.mine[index].pop()
 
-        if last_droped_column.colour != Fore.WHITE:
+        if last_dropped_column.colour != Fore.WHITE:
             game_state = 'game_over'
 
             # reset coordinates
@@ -50,6 +49,6 @@ def next_wave(level: Level, game_state: 'str') -> tuple[Union[Level, Level], str
                 level.grid.grid[y][x].width = x
                 level.grid.grid[y][x].height = y
     except:
-        game_state='level_complited'
+        game_state = 'level_completed'
 
     return level, game_state
